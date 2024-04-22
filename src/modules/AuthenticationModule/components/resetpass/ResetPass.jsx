@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import { baseUrl } from "../../../ContextApi/ContextApi";
 export default function Resetpass() {
   const [psw1, setPsw1] = useState(false);
   const [psw2, setPsw2] = useState(false);
@@ -13,16 +14,16 @@ export default function Resetpass() {
   let {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
   });
-  let password = watch("password");
+
   const onSubmit = async (data) => {
     try {
       let response = await axios.post(
-        "https://upskilling-egypt.com:3006/api/v1/Users/Reset/Request",
+        // "https://upskilling-egypt.com:3006/api/v1/Users/Reset/Request"
+        `${baseUrl}/Users/Reset/Request`,
         data
       );
       toast.success("Password updated successfully");

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { baseUrl } from "../../../ContextApi/ContextApi";
 export default function Forgotpass() {
   const navigate = useNavigate();
   let {
@@ -14,10 +15,8 @@ export default function Forgotpass() {
   } = useForm();
   const onSubmit = async (data) => {
     try {
-      let response = await axios.post(
-        "https://upskilling-egypt.com:3006/api/v1/Users/Reset/Request",
-        data
-      );
+       // "https://upskilling-egypt.com:3006/api/v1/Users/Reset/Request",
+      let response = await axios.post(`${baseUrl}/Users/Reset/Request`, data);
       let result = response.data.token;
       console.log(result);
       toast.success("Your request is being processed, please check your email");

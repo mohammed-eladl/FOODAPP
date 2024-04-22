@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { baseUrl } from "../../../ContextApi/ContextApi";
 export default function Login({ saveLoginData }) {
   const navigate = useNavigate();
   let {
@@ -15,7 +16,8 @@ export default function Login({ saveLoginData }) {
   const onSubmit = async (data) => {
     try {
       let response = await axios.post(
-        "https://upskilling-egypt.com:3006/api/v1/Users/Login",
+        // "https://upskilling-egypt.com:3006/api/v1/Users/Login"
+        `${baseUrl}/Users/Login`,
         data
       );
       localStorage.setItem("token", response.data.token);
@@ -85,7 +87,9 @@ export default function Login({ saveLoginData }) {
                   )}
                   <div className="links d-flex justify-content-between my-3">
                     <a>Register Now?</a>
-                    <Link to={"/forgotPass"} className="frg-pass">Forgot Password?</Link>
+                    <Link to={"/forgotPass"} className="frg-pass">
+                      Forgot Password?
+                    </Link>
                   </div>
                   <button className="btn login-btn w-100">Login</button>
                 </form>
