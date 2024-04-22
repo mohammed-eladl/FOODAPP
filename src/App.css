@@ -1,0 +1,29 @@
+.auth-container {
+  background-image: url("./assets/image/bg-auth.png");
+  background-size: cover;
+}
+.bg-overly {
+  background: linear-gradient(
+    rgba(47, 140, 96, 0.4),
+    rgba(0, 0, 0, 0.6)
+  );
+}
+i {
+  color: #8391a1;
+}
+
+.auth-container .login-btn {
+  background-color: #4aa35a !important;
+  color: #fff;
+  font-weight: 700;
+}
+.auth-container .links .frg-pass {
+  color: #4aa35a !important;
+  text-decoration: none !important;
+  font-weight: 500;
+}
+
+.auth-container .links .frg-pass:hover {
+  cursor: pointer;
+  color: #4aa35a !important;
+}
