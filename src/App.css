@@ -27,3 +27,20 @@ i {
   cursor: pointer;
   color: #4aa35a !important;
 }
+.sidebar-container .ps-sidebar-container{
+  background: #1f263e;
+  color: #fff;
+  height: 100vh;
+}
+.sidebar-container .ps-sidebar-container .ps-menu-button:hover{
+  background-color: rgba(47, 140, 96, 0.4) ;
+}
+.header-container{
+  background-image: url("./assets/image/header-bg-svg.svg");
+  background-size: cover;
+  color: #fff;
+}
+
+.nnnnn{
+  border: 6px solid red;
+}

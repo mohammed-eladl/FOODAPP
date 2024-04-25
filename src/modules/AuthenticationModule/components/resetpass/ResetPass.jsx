@@ -8,8 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { baseUrl } from "../../../ContextApi/ContextApi";
 export default function Resetpass() {
-  const [psw1, setPsw1] = useState(false);
-  const [psw2, setPsw2] = useState(false);
+  const [passwordVisibilit, setPasswordVisibilit] = useState(false);
+  const [confirmPasswordVisibility, setConfirmPasswordVisibility] =
+    useState(false);
   const navigate = useNavigate();
   let {
     register,
@@ -22,13 +23,12 @@ export default function Resetpass() {
   const onSubmit = async (data) => {
     try {
       let response = await axios.post(
-        // "https://upskilling-egypt.com:3006/api/v1/Users/Reset/Request"
-        `${baseUrl}/Users/Reset/Request`,
+        // "https://upskilling-egypt.com:3006/api/v1/Users/Reset"
+        `${baseUrl}/Users/Reset`,
         data
       );
       toast.success("Password updated successfully");
       navigate("/login");
-      navigate("/resetpass");
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -101,7 +101,7 @@ export default function Resetpass() {
                       <i className="fa fa-lock"></i>
                     </span>
                     <input
-                      type={psw1 ? "text" : "password"}
+                      type={passwordVisibilit ? "text" : "password"}
                       className="form-control"
                       placeholder="New Password"
                       {...register("password", {
@@ -114,7 +114,11 @@ export default function Resetpass() {
                         },
                       })}
                     />
+                    <span className="input-group-text border-0 p-3 eye" id="addon-wrapping">
+                      <i id="showpass" className="fa fa-eye" onClick={() => { setPasswordVisibilit(!passwordVisibilit) }}></i>
+                      </span>
                   </div>
+                     
                   {errors.password && (
                     <p className="alert alert-danger">
                       {errors.password.message}
@@ -127,7 +131,7 @@ export default function Resetpass() {
                       <i className="fa fa-lock"></i>
                     </span>
                     <input
-                      type={psw2 ? "text" : "password"}
+                      type={confirmPasswordVisibility ? "text" : "password"}
                       className="form-control"
                       placeholder="Confirm New Password"
                       {...register("confirmPassword", {
@@ -136,8 +140,14 @@ export default function Resetpass() {
                           // @ts-ignore
                           value === password || `Doesn't match password`,
                       })}
+                      
                     />
+                     
+                     <span className="input-group-text border-0 p-3 eye" id="addon-wrapping">
+                      <i id="showpass" className="fa fa-eye" onClick={() => { setConfirmPasswordVisibility(!confirmPasswordVisibility) }}></i>
+                      </span>
                   </div>
+                 
                   {errors.confirmPassword && (
                     <p className="alert alert-danger">
                       {errors.confirmPassword.message}
