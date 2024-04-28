@@ -41,6 +41,7 @@ i {
   color: #fff;
 }
 
-.nnnnn{
-  border: 6px solid red;
+.fa.fa-trash:hover ,.fa.fa-edit:hover{
+  cursor: pointer ;
+
 }

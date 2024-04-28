@@ -48,7 +48,7 @@ export default function Forgotpass() {
                       <i className="fa fa-envelope"></i>
                     </span>
                     <input
-                      type="text"
+                      type="email"
                       className="form-control"
                       placeholder="Enter Your E-mail"
                       {...register("email", {

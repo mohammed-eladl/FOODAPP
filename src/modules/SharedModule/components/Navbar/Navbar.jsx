@@ -1,9 +1,9 @@
-import navbarlogo from '../../../../assets/image/avatar.png'
+// @ts-ignore
+import navbarlogo from "../../../../assets/image/man.png";
+import wave from "../../../../assets/image/wave.png";
 export default function Navbar({ loginData }) {
-  console.log(loginData)
   return (
     <>
-   
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
@@ -23,9 +23,9 @@ export default function Navbar({ loginData }) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" >
-                  <img src={navbarlogo}/>
-                  Hello: {loginData?.userName}
+                <a className="nav-link">
+                  <img src={navbarlogo} />
+                  <span className="fw-bold"> Hello: {loginData?.userName} <img src={wave} /> </span>
                 </a>
               </li>
             </ul>

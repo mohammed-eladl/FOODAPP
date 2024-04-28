@@ -22,6 +22,8 @@ export default function SideBar() {
             onClick={toggleCollapse}
             icon={<img className="" src={togger} alt="" />}
           ></MenuItem>
+          <br />
+       
           <MenuItem
             icon={<i className="fa fa-home" aria-hidden="true"></i>}
             component={<Link to="/dashboard" />}
@@ -29,19 +31,20 @@ export default function SideBar() {
             Home
           </MenuItem>
           <MenuItem
-            icon={<i className="fa fa-home" aria-hidden="true"></i>}
+            icon={<i className="fa fa-users" aria-hidden="true"></i>}
             component={<Link to="/dashboard/users" />}
           >
             Users
           </MenuItem>
           <MenuItem
-            icon={<i className="fa fa-home" aria-hidden="true"></i>}
+            icon={<i className="fa fa-receipt" aria-hidden="true"></i>}
             component={<Link to="/dashboard/recipes" />}
           >
             Recipes
           </MenuItem>
+
           <MenuItem
-            icon={<i className="fa fa-home" aria-hidden="true"></i>}
+            icon={<i className="fa fa-layer-group" aria-hidden="true"></i>}
             component={<Link to="/dashboard/categories" />}
           >
             Categories

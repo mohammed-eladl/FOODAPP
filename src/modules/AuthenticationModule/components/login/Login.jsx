@@ -37,7 +37,7 @@ export default function Login({ saveLoginData }) {
           <div className="row vh-100 justify-content-center align-items-center">
             <div className="col-md-6 bg-white p-4 border border-3">
               <div className="text-center">
-                <img src={logo} alt="logo" className="w-25" />
+                <img src={logo} alt="logo" className="w-50" />
               </div>
               <div className="form-content">
                 <h3>Login In</h3>
@@ -51,7 +51,7 @@ export default function Login({ saveLoginData }) {
                       <i className="fa fa-envelope"></i>
                     </span>
                     <input
-                      type="text"
+                      type="email"
                       className="form-control"
                       placeholder="Enter Your E-mail"
                       {...register("email", {
@@ -72,7 +72,7 @@ export default function Login({ saveLoginData }) {
                       <i className="fa fa-key"></i>
                     </span>
                     <input
-                      type="text"
+                      type="password"
                       className="form-control"
                       placeholder="Password"
                       {...register("password", {
