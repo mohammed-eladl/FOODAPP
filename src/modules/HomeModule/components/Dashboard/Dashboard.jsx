@@ -1,6 +1,7 @@
 import Header from "../../../SharedModule/components/Header/Header";
 // @ts-ignore
 import headerImg from "../../../../assets/image/home-avatar1.svg";
+import RecipesListHeader from "../../../SharedModule/components/RecipesListHeader/RecipesListHeader";
 export default function Dashboard() {
   return (
     <>
@@ -10,6 +11,7 @@ export default function Dashboard() {
               can now see the options`}
         imgUrl={headerImg}
       />
+      <RecipesListHeader/>
     </>
   );
 }

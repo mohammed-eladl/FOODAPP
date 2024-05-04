@@ -10,16 +10,19 @@ import { useForm } from "react-hook-form";
 import { baseUrl } from "../../../ContextApi/ContextApi";
 import DeleteData from "../../../SharedModule/components/DeleteData/DeleteData";
 import Button from "react-bootstrap/Button";
+
+
 export default function CategoriesList() {
   let {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
 
+  } = useForm();
+  const [nameValue, setNameValue] = useState("");
+  const [arryOfPages, setArryOfPages] = useState([]);
   const [categorisList, setCategorisList] = useState([]);
   const [currentName, setCurrentName] = useState("");
-
   const [show, setShow] = useState(false);
   const [catId, setCatId] = useState();
   const handleClose = () => setShow(false);
@@ -40,14 +43,22 @@ export default function CategoriesList() {
   };
 
   // Get the list of categories
-  const getCategorisList = async () => {
+  const getCategorisList = async (name,pageSize,pageNumber) => {
     try {
       let response = await axios.get(
         // "https://upskilling-egypt.com:3006/api/v1/Category/?pageSize=10&pageNumber=1",
-        `${baseUrl}/Category/?pageSize=10&pageNumber=1`,
+        `${baseUrl}/Category/?pageSize=${pageSize}&pageNumber=${pageNumber}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          params:{
+            name: name,
+          }
         }
+      );
+      setArryOfPages(
+        Array(response.data.totalNumberOfPages)
+          .fill()
+          .map((_, i) => i + 1)
       );
       setCategorisList(response.data.data);
     } catch (error) {
@@ -68,9 +79,7 @@ export default function CategoriesList() {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getCategorisList();
-  }, []);
+ 
 
   //  Update Category
   const onSubmitUpdate = async (data) => {
@@ -105,6 +114,16 @@ export default function CategoriesList() {
     }
   };
 
+
+  const getNameValue = (input) => {
+    setNameValue(input.target.value);
+    getCategorisList(input.target.value, 20, 1);
+  };
+
+
+  useEffect(() => {
+    getCategorisList("",20,1);
+  }, []);
   return (
     <>
       <Header
@@ -214,46 +233,104 @@ export default function CategoriesList() {
           </div>
         </div>
 
+
+        <div className="filteration my-3">
+          <div className="row">
+            <div className="col-md-12">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search By category name"
+                onChange={getNameValue}
+              />
+            </div>
+
+           
+          </div>
+        </div>
+
+
+
         <div className="table-container text-center mx-4">
           {categorisList.length > 0 ? (
-            <table className="table text-center">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Category Name</th>
-                  <th scope="col">Creation Date</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {categorisList.map((item, index) => (
-                  <tr key={item.id}>
-                    <th scope="row">{index + 1}</th>
-                    <td>{item.name}</td>
-                    <td>{item.creationDate}</td>
-                    <td>
-                      <i
-                        onClick={() => {
-                          handleUpdateShow(item.id);
-                          setCurrentName(item.name);
-                        }}
-                        className="fa fa-edit text-warning mx-2"
-                        aria-hidden="true"
-                      ></i>
-
+           <>
+             <table className="table text-center">
+               <thead>
+                 <tr>
+                   <th scope="col">ID</th>
+                   <th scope="col">Category Name</th>
+                   <th scope="col">Creation Date</th>
+                   <th scope="col">Actions</th>
+                 </tr>
+               </thead>
+            
+               <tbody>
+                 {categorisList.map((item, index) => (
+                   <tr key={item.id}>
+                     <th scope="row">{index + 1}</th>
+                     <td>{item.name}</td>
+                     <td>{item.creationDate}</td>
+                     <td>
+                       <i
+                         onClick={() => {
+                           handleUpdateShow(item.id);
+                           setCurrentName(item.name);
+                         }}
+                         className="fa fa-edit text-warning mx-2"
+                         aria-hidden="true"
+                       ></i>
+            
+                      
+                         <i
+                           onClick={() => handleDeleteShow(item.id)}
+                           className="fa fa-trash text-danger mx-2"
+                           aria-hidden="true"
+                         ></i>
                      
-                        <i
-                          onClick={() => handleDeleteShow(item.id)}
-                          className="fa fa-trash text-danger mx-2"
-                          aria-hidden="true"
-                        ></i>
-                    
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                     </td>
+                   </tr>
+                 ))}
+               </tbody>
+             </table>
+            
+             <nav aria-label="Page navigation example">
+                <ul className="pagination">
+                  <li className="page-item">
+                    <a className="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">«</span>
+                    </a>
+                  </li>
+                  {arryOfPages.map((pageNum) => (
+                     <li
+                     key={pageNum}
+                     className="page-item"
+                     onClick={() => {
+                      getCategorisList(
+                         nameValue,
+                         20,
+                         pageNum
+                       );
+                     }}
+                   >
+                     <a className="page-link">
+                       {pageNum}
+                     </a>
+                   </li>
+                  )
+                  
+                  )}
+
+                  <li className="page-item">
+                    <a className="page-link" aria-label="Next">
+                      <span aria-hidden="true">»</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
+           </>
+
+
           ) : (
             <NoData />
           )}

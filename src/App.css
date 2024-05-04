@@ -8,7 +8,7 @@
     rgba(0, 0, 0, 0.6)
   );
 }
-i {
+.auth-container i {
   color: #8391a1;
 }
 
@@ -41,7 +41,16 @@ i {
   color: #fff;
 }
 
-.fa.fa-trash:hover ,.fa.fa-edit:hover{
+.fa.fa-trash:hover ,.fa.fa-edit:hover,.fa.fa-eye:hover{
   cursor: pointer ;
 
+}
+
+
+/* 
+recipeheader-container Components
+*/
+
+.recipeheader-container{
+  background: #F0FFEF;
 }

@@ -14,7 +14,9 @@ import Forgotpass from "./modules/AuthenticationModule/components/forgotpass/For
 import ProtectedRoute from "./modules/SharedModule/components/ProtectedRoute/ProtectedRoute";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-
+import RecipeData from "./modules/RecipesModule/components/RecipeData/RecipeData";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [loginData, setLoginData] = useState(null);
   const saveLoginData = () => {
@@ -54,6 +56,10 @@ function App() {
         {
           path: "recipes",
           element: <RecipesList />,
+        },
+        {
+          path: "recipeData",
+          element: <RecipeData />,
         },
         {
           path: "categories",
@@ -97,7 +103,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}>
+      </RouterProvider>
+      <ToastContainer />
     </>
   );
 }
