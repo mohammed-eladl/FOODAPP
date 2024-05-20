@@ -6,7 +6,8 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import ChangePass from "../../../AuthenticationModule/components/changepass/ChangePass";
 
-export default function SideBar() {
+export default function SideBar({ loginData }) {
+  console.log(loginData.userGroup);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
@@ -26,7 +27,7 @@ export default function SideBar() {
       {/*  */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Body>
-          <ChangePass logout={logout}/>
+          <ChangePass logout={logout} />
         </Modal.Body>
       </Modal>
 
@@ -45,12 +46,18 @@ export default function SideBar() {
             >
               Home
             </MenuItem>
-            <MenuItem
-              icon={<i className="fa fa-users" aria-hidden="true"></i>}
-              component={<Link to="/dashboard/users" />}
-            >
-              Users
-            </MenuItem>
+
+            {loginData?.userGroup == "SuperAdmin" ? (
+              <MenuItem
+                icon={<i className="fa fa-users" aria-hidden="true"></i>}
+                component={<Link to="/dashboard/users" />}
+              >
+                Users
+              </MenuItem>
+            ) : (
+              ""
+            )}
+
             <MenuItem
               icon={<i className="fa fa-receipt" aria-hidden="true"></i>}
               component={<Link to="/dashboard/recipes" />}
@@ -58,12 +65,28 @@ export default function SideBar() {
               Recipes
             </MenuItem>
 
-            <MenuItem
-              icon={<i className="fa fa-layer-group" aria-hidden="true"></i>}
-              component={<Link to="/dashboard/categories" />}
-            >
-              Categories
-            </MenuItem>
+            {loginData?.userGroup !== "SuperAdmin" ? (
+              <MenuItem
+                icon={<i className="fa fa-bookmark" aria-hidden="true"></i>}
+                component={<Link to="/dashboard/favs" />}
+              >
+                Favs
+              </MenuItem>
+            ) : (
+              ""
+            )}
+
+            {loginData?.userGroup == "SuperAdmin" ? (
+              <MenuItem
+                icon={<i className="fa fa-layer-group" aria-hidden="true"></i>}
+                component={<Link to="/dashboard/categories" />}
+              >
+                Categories
+              </MenuItem>
+            ) : (
+              ""
+            )}
+
             <MenuItem
               onClick={handleShow}
               icon={<i className="fa fa-key" aria-hidden="true"></i>}

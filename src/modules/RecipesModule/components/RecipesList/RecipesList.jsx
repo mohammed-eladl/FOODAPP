@@ -24,7 +24,11 @@ export default function RecipesList() {
 
   const [arryOfPages, setArryOfPages] = useState([]);
 
+  const [userData, setUserData] = useState(null);
+
   const [recipesId, setRecipesId] = useState();
+
+  
   const [deleteShow, setDeleteShow] = useState(false);
   const handleDeleteClose = () => setDeleteShow(false);
   const handleDeleteShow = (id) => {
@@ -135,6 +139,7 @@ export default function RecipesList() {
     getRecipesList();
     getCategorisList();
     getTagsList();
+    setUserData(JSON.parse(localStorage.getItem("userData")));
   }, []);
   return (
     <>
@@ -151,21 +156,25 @@ export default function RecipesList() {
             <h4>Recipes Table Details</h4>
             <p>You can check all details</p>
           </div>
-          <div className="col-md-6 d-flex justify-content-end p-0 ">
-            <button
-              onClick={() => {
-                goToRecipeData();
-              }}
-              style={{
-                backgroundColor: "#009247",
-                color: "#fff",
-                fontWeight: "500",
-              }}
-              className="btn"
-            >
-              Add New Recipes
-            </button>
-          </div>
+          {userData?.userGroup == "SuperAdmin" ? (
+            <div className="col-md-6 d-flex justify-content-end p-0 ">
+              <button
+                onClick={() => {
+                  goToRecipeData();
+                }}
+                style={{
+                  backgroundColor: "#009247",
+                  color: "#fff",
+                  fontWeight: "500",
+                }}
+                className="btn"
+              >
+                Add New Recipes
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="filteration my-3">
           <div className="row">
@@ -257,18 +266,28 @@ export default function RecipesList() {
                       <td>{item.description}</td>
                       {/* <td>{item.category[0].name}</td> */}
                       <td>{item.tag.name}</td>
-                      <td>
-                        <i
-                          className="fa fa-edit text-warning mx-2"
-                          aria-hidden="true"
-                        ></i>
+                      {userData?.userGroup == "SuperAdmin" ? (
+                        <td>
+                          <i
+                            className="fa fa-edit text-warning mx-2"
+                            aria-hidden="true"
+                          ></i>
 
-                        <i
-                          onClick={() => handleDeleteShow(item.id)}
-                          className="fa fa-trash text-danger mx-2"
-                          aria-hidden="true"
-                        ></i>
-                      </td>
+                          <i
+                            onClick={() => handleDeleteShow(item.id)}
+                            className="fa fa-trash text-danger mx-2"
+                            aria-hidden="true"
+                          ></i>
+                        </td>
+                      ) : (
+                        <td>
+                          <i
+                            // onClick={}
+                            className="fa fa-bookmark text-info mx-2"
+                            aria-hidden="true"
+                          ></i>
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>
@@ -281,25 +300,22 @@ export default function RecipesList() {
                     </a>
                   </li>
                   {arryOfPages.map((pageNum) => (
-                     <li
-                     className="page-item"
-                     onClick={() => {
-                       getRecipesList(
-                         nameValue,
-                         tagIdValue,
-                         categoryIdValue,
-                         2,
-                         pageNum
-                       );
-                     }}
-                   >
-                     <a className="page-link">
-                       {pageNum}
-                     </a>
-                   </li>
-                  )
-                  
-                  )}
+                    <li
+                      key={pageNum}
+                      className="page-item"
+                      onClick={() => {
+                        getRecipesList(
+                          nameValue,
+                          tagIdValue,
+                          categoryIdValue,
+                          2,
+                          pageNum
+                        );
+                      }}
+                    >
+                      <a className="page-link">{pageNum}</a>
+                    </li>
+                  ))}
 
                   <li className="page-item">
                     <a className="page-link" aria-label="Next">

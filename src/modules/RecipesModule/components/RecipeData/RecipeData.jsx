@@ -184,6 +184,9 @@ export default function RecipeData() {
 
           {/* Image */}
           <div className="input-group mb-1">
+           
+
+
             <input
               type="file"
               className="form-control"
@@ -192,12 +195,35 @@ export default function RecipeData() {
                 required: "recipeImage is required",
               })}
             />
+
+           
           </div>
           {errors.recipeImage && (
             <p className="alert alert-danger p-2">
               {errors.recipeImage.message}
             </p>
           )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <button
             className="btn"

@@ -1,4 +1,6 @@
+// @ts-ignore
 import logo4o4 from "../../../../assets/image/not-found-bg.png";
+// @ts-ignore
 import logo from "../../../../assets/image/logo.png";
 
 export default function NotFound() {
@@ -7,6 +9,9 @@ export default function NotFound() {
       <div className="logo">
         <img src={logo} alt="logo" className="px-5 py-4" />
       </div>
+
+
+    
 
       <div className="vw-100 container-fluid">
         <div className="row align-items-center">

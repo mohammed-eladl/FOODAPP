@@ -54,3 +54,31 @@ recipeheader-container Components
 .recipeheader-container{
   background: #F0FFEF;
 }
+
+
+
+
+.register .logo-container{
+  width: 100%;
+  /* background-color: aqua; */
+}
+.register .logo-container img{
+  width: 35%;
+}
+.maintext{
+  color: #494949  ;
+}
+.secondtext{
+  font-size: 14px;
+}.inputdetails span{
+  border-top-right-radius: 0%;
+  border-bottom-right-radius: 0%;
+}
+.inputdetails input{
+  border-top-left-radius: 0%;
+  border-bottom-left-radius: 0%;
+
+}.nounderline
+{
+  text-decoration: none;
+}

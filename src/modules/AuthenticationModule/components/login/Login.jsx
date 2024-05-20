@@ -88,7 +88,7 @@ export default function Login({ saveLoginData }) {
                     </p>
                   )}
                   <div className="links d-flex justify-content-between my-3">
-                    <a>Register Now?</a>
+                    <Link to={"/register"} className="frg-pass">Register Now?</Link>
                     <Link to={"/forgotPass"} className="frg-pass">
                       Forgot Password?
                     </Link>

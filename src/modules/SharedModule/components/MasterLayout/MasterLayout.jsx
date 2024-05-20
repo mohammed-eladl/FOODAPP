@@ -9,7 +9,7 @@ export default function MasterLayout({ loginData }) {
         <div className="d-flex">
         
             <div>
-              <SideBar />
+              <SideBar loginData={loginData}/>
             </div>
    
 

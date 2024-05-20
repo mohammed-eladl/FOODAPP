@@ -212,6 +212,7 @@ export default function UsersList() {
                     <th scope="col">User Name</th>
                     <th scope="col">Image</th>
                     <th scope="col">Phone Number</th>
+                    <th scope="col">Country</th>
                     <th scope="col">Email</th>
                     <th scope="col">Actions</th>
                   </tr>
@@ -248,6 +249,7 @@ export default function UsersList() {
                       </td>
 
                       <td>{user?.phoneNumber}</td>
+                      <td>{user?.country}</td>
                       <td>{user?.email}</td>
                       <td>
                         <i

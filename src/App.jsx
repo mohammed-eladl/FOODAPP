@@ -15,14 +15,23 @@ import ProtectedRoute from "./modules/SharedModule/components/ProtectedRoute/Pro
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import RecipeData from "./modules/RecipesModule/components/RecipeData/RecipeData";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Favs from "./modules/SharedModule/components/Favs/Favs";
 function App() {
   const [loginData, setLoginData] = useState(null);
   const saveLoginData = () => {
     let endcodedToken = localStorage.getItem("token");
-    let decodedToken = jwtDecode(endcodedToken);
-    setLoginData(decodedToken);
+
+    if (endcodedToken) {
+      try {
+        let decodedToken = jwtDecode(endcodedToken);
+        localStorage.setItem("userData", JSON.stringify(decodedToken));
+        setLoginData(decodedToken);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    }
   };
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -60,6 +69,10 @@ function App() {
         {
           path: "recipeData",
           element: <RecipeData />,
+        },
+        {
+          path: "favs",
+          element: <Favs />,
         },
         {
           path: "categories",
@@ -103,8 +116,7 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router}>
-      </RouterProvider>
+      <RouterProvider router={router}></RouterProvider>
       <ToastContainer />
     </>
   );
